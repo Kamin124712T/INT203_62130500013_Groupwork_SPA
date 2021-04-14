@@ -3,3 +3,7 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.nav{
+    @apply w-20 text-center;
+}
