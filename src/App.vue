@@ -12,10 +12,11 @@
       </div>
     </div>
   </div>
-  <div class="w-full h-176 mt-12 -z-10 bg-red-200 bg-no-repeat bg-center fixed opacity-20 bgimg"></div>
+  <div class="w-full h-full mt-12 -z-10 bg-red-200 bg-no-repeat bg-center fixed opacity-20 bgimg"></div>
   <router-view class="w-272 pt-12 mx-auto"/>
 </template>
 <style>
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 .bgimg {
   background-image: url("./assets/Studio_Ghibli_logo.png");
   background-size: 60%;
