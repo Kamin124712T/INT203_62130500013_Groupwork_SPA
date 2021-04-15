@@ -86,7 +86,7 @@ export default {
             reader.readAsDataURL(file);
         },
         validateName() {
-            this.invalidName = this.name === '' ? true : false
+            this.invalidName = this.name === ''||this.name === undefined ? true : false
         },
         submitForm() {
             this.validateName()
