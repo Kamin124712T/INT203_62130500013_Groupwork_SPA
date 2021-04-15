@@ -65,14 +65,14 @@
 <script>
 export default {
     props: ["isEdit", "editItem"],
-    emits: ["item-edit", "item-add","is-show"],
+    emits: ["item-edit", "item-add", "is-show"],
     data() {
         return {
-            imgSrc: require('../assets/addImg.jpg'),
-            name: "",
-            director: "",
-            description: "",
-            year: "",
+            name: this.editItem.name,
+            director: this.editItem.director,
+            description: this.editItem.description,
+            imgSrc: this.editItem.imgSrc ? this.editItem.imgSrc : require('../assets/addImg.jpg'),
+            year: this.editItem.year,
             invalidName: false,
         };
     },
@@ -114,12 +114,12 @@ export default {
         },
         cancel() {
             this.name = "",
-            this.director = "",
-            this.description = "",
-            this.imgSrc = require('../assets/addImg.jpg'),
-            this.year = "",
-            this.$emit("item-show",false)
-        }
-    },
+                this.director = "",
+                this.description = "",
+                this.imgSrc = require('../assets/addImg.jpg'),
+                this.year = "",
+                this.$emit("item-show", false)
+        },
+    }
 }
 </script>

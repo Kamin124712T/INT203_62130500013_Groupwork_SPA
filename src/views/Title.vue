@@ -1,6 +1,13 @@
 <template>
     <div>
-        <base-manage-item v-if="isShow" :isEdit="isEdit" @item-show="onIsShow" @item-add="addItem"></base-manage-item>
+        <base-manage-item
+            v-if="isShow"
+            :isEdit="isEdit"
+            :editItem="itemEdit"
+            @item-show="onIsShow"
+            @item-add="addItem"
+            @item-edit="editItem"
+        ></base-manage-item>
         <base-search
             msg="Studio Ghibli work list "
             :itemAll="titleAll"
@@ -9,9 +16,9 @@
         ></base-search>
         <div class="w-full flex flex-row flex-wrap">
             <div v-for="item in itemShow" :key="item.id">
-                <item-title :item="item" @item-delete="deleteItem"></item-title>
+                <item-title :item="item" @item-delete="deleteItem" @item-edit="editOn"></item-title>
             </div>
-            <div @click="onIsShow(true)" class="w-80 flex flex-col items-center mx-5 my-4 cursor-pointer">
+            <div @click="addOn" class="w-80 flex flex-col items-center mx-5 my-4 cursor-pointer">
                 <img src="../assets/addImg.jpg" class="w-80" />
                 <p class="truncate text-4xl text-red-900 mt-4 w-80 text-center">Add Title</p>
             </div>
@@ -28,8 +35,9 @@ export default {
         return {
             itemShow: [],
             titleAll: [],
-            isShow:false,
-            isEdit:false,
+            isShow: false,
+            isEdit: false,
+            itemEdit: [],
             url: "http://localhost:5001/title"
         };
     },
@@ -37,8 +45,18 @@ export default {
         ShowItem(item) {
             this.itemShow = item
         },
-        onIsShow(show){
-            this.isShow= show
+        onIsShow(show) {
+            this.isShow = show
+        },
+        addOn() {
+            this.itemEdit = []
+            this.isEdit = false
+            this.onIsShow(true)
+        },
+        editOn(item) {
+            this.itemEdit = item
+            this.isEdit = true
+            this.onIsShow(true)
         },
         async fetch() {
             try {
@@ -78,6 +96,41 @@ export default {
                 const data = await res.json()
                 this.titleAll = [...this.titleAll, data]
                 this.itemShow = this.titleAll
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async editItem(item) {
+            try {
+                const res = await fetch(`${this.url}/${item.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: item.name,
+                        director: item.director,
+                        description: item.description,
+                        imgSrc: item.imgSrc,
+                        year: item.year,
+                    })
+                })
+                const data = await res.json()
+                this.titleAll = this.titleAll.map((i) =>
+                    i.id === item.id
+                        ? {
+                            ...i,
+                            name: data.name,
+                            director: data.director,
+                            description: data.description,
+                            imgSrc: data.imgSrc,
+                            year: data.year,
+                        }
+                        : i
+                )
+                this.itemShow = this.titleAll
+                this.itemEdit = []
+                this.isEdit = false
             } catch (error) {
                 console.log(error)
             }
