@@ -8,7 +8,6 @@
         <router-link to="/" class="nav">Home</router-link>
         <router-link to="/about" class="nav">About</router-link>
         <router-link to="/title" class="nav">Title</router-link>
-        <router-link to="/gallery" class="nav">Gallery</router-link>
       </div>
     </div>
   </div>

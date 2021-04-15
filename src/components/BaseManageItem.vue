@@ -2,7 +2,7 @@
     <div class="flex justify-center items-center fixed z-10 inset-0 overflow-y-auto">
         <div class="w-176 h-128 bg-red-300 rounded-3xl shadow-lg">
             <div>
-                <p class="h-24">{{ }}</p>
+                <p class="h-16 text-5xl text-red-800 font-medium mt-5 ml-10">{{isEdit?'Edit Title':'Add Title'}}</p>
                 <form @submit.prevent="submitForm">
                     <div class="flex flex-row">
                         <div>

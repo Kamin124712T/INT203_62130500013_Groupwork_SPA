@@ -117,7 +117,7 @@ export default {
                 })
                 const data = await res.json()
                 this.titleAll = this.titleAll.map((i) =>
-                    i.id === item.id
+                    i.id === data.id
                         ? {
                             ...i,
                             name: data.name,

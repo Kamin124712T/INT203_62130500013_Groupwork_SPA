@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         searchItem(){
-            this.itemSearch = this.itemAll.filter( i => i.name.concat(i.title).toLowerCase().includes(this.inputSearch.toLowerCase())||i.name.concat(i.description).concat(i.director).concat(i.year).toLowerCase().includes(this.inputSearch.toLowerCase()))
+            this.itemSearch = this.itemAll.filter( i => i.name.concat(i.description).concat(i.director).concat(i.year).toLowerCase().includes(this.inputSearch.toLowerCase()))
             this.$emit("item-search", this.itemSearch);
         }
     },
